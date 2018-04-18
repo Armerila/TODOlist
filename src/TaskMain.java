@@ -41,14 +41,13 @@ public class TaskMain extends Task {
 
 		
 		JTextField def = new JTextField();
-	//	JTextField prior = new JTextField();
 		String[] priors = {"High","Medium","Low"};
 		JComboBox<String> prior = new JComboBox<String>(priors);
 		JTextField dDate = new JTextField();
         JCheckBox checkBox = new JCheckBox("Check to set task completed");
         checkBox.setSelected(true);
 		
-		
+		//buttons
 		JButton add = new JButton("Add");
 		JButton delete = new JButton("Delete");
 		JButton update = new JButton("Update");     
@@ -58,7 +57,6 @@ public class TaskMain extends Task {
 		prioLab.setBounds(20, 280, 200, 25);;
 		dueLab.setBounds(20, 330, 200, 25);;
 
-		
 		def.setBounds(20, 250, 200, 25);
 		prior.setBounds(20, 300, 100, 25);
 		dDate.setBounds(20, 350, 100, 25);
@@ -110,6 +108,9 @@ public class TaskMain extends Task {
 					checkBox.setSelected(false);
 				}
 				try {
+					/**
+					 * Adds a new task with user input as parameters.
+					 */
 					Tasks.add(new Task(def.getText(), prior.getSelectedItem().toString(), dDate.getText(), checkBox.isSelected()));
 				} catch (ParseException e1) {
 					e1.printStackTrace();
@@ -131,6 +132,9 @@ public class TaskMain extends Task {
 				if(i >= 0)
 				{
 					model.removeRow(i);
+					/**
+					 * Delete the task at selected rows index.
+					 */
 					Tasks.remove(i);
 				}
 				else
@@ -175,7 +179,9 @@ public class TaskMain extends Task {
 	    					model.setValueAt("No", i, 3);
 	    					checkBox.setSelected(false);
 	    				}
-
+	    				/**
+	    				 * Update the task on selected rows index with user input as parameters.
+	    				 */
 	    				try {
 							Tasks.set(i, new Task(def.getText(), prior.getSelectedItem().toString(), dDate.getText(), checkBox.isSelected()));
 						} catch (ParseException e1) {
