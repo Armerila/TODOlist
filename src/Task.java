@@ -27,6 +27,14 @@ public class Task
 	{
 	}
 	
+	/**
+	 * Task constructor
+	 * 
+	 * @param taskDef		Written string description of task
+	 * @param date			Due date of the task
+	 * @param isComplete	Task completed/not completed
+	 * @param p				Priority (HIGH, MEDIUM, LOW)
+	 */
 	public Task(String taskDef, String date, boolean isComplete, String p) throws ParseException
 	{
 		this.taskDef = taskDef;
@@ -34,12 +42,16 @@ public class Task
 		this.isComplete = isComplete;
 		this.priority = Priority.valueOf(p.toUpperCase());
 	}
-	
+	/**
+	 * Returns a string representation of a tasks values.
+	 */
 	public String toString() 
 	{
 		return taskDef + " -"+priority+"- " +" "+dueDate +" "+isComplete;
 	}
 
+	///////Get/Set////////
+	
 	public Priority getPriority() 
 	{
 		return priority;
