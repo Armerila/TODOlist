@@ -39,13 +39,12 @@ public class TaskMain extends Task {
 		JLabel prioLab = new JLabel("Priority (High, Medium, Low):");
 		JLabel dueLab = new JLabel("Due date (dd/mm/yyyy):");
 
-		
 		JTextField def = new JTextField();
 		String[] priors = {"High","Medium","Low"};
 		JComboBox<String> prior = new JComboBox<String>(priors);
 		JTextField dDate = new JTextField();
-        JCheckBox checkBox = new JCheckBox("Check to set task completed");
-        checkBox.setSelected(true);
+		JCheckBox checkBox = new JCheckBox("Check to set task completed");
+		checkBox.setSelected(true);
 		
 		//buttons
 		JButton add = new JButton("Add");
