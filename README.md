@@ -1,5 +1,5 @@
 # TODOlist
 
-Mock-up TODO-list program
+A mock-up TODO-list program
 
 
