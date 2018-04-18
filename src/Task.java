@@ -1,5 +1,4 @@
 import java.text.*;
-import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -19,28 +18,35 @@ public class Task
 		HIGH, MEDIUM, LOW;
 	} 
 	private String taskDef;
-	private static Date dueDate;
 	private Priority priority; 
+	private static Date dueDate;
 	private boolean isComplete;
 
 	public Task()
 	{
+		taskDef = null;
+		priority = Priority.HIGH;
+		dueDate = null;
+		isComplete = false;
 	}
+	
 	
 	/**
 	 * Task constructor
 	 * 
 	 * @param taskDef		Written string description of task
+	 * @param p				Priority (HIGH, MEDIUM, LOW)
 	 * @param date			Due date of the task
 	 * @param isComplete	Task completed/not completed
-	 * @param p				Priority (HIGH, MEDIUM, LOW)
+	 * 
 	 */
-	public Task(String taskDef, String date, boolean isComplete, String p) throws ParseException
+	public Task(String taskDef, String p, String date, boolean isComplete) throws ParseException
 	{
 		this.taskDef = taskDef;
+		this.priority = Priority.valueOf(p.toUpperCase());
 		Task.dueDate = parser.parse(date);
 		this.isComplete = isComplete;
-		this.priority = Priority.valueOf(p.toUpperCase());
+
 	}
 	/**
 	 * Returns a string representation of a tasks values.
@@ -92,7 +98,10 @@ public class Task
 		this.isComplete = isComplete;
 	}
 	
-	
+	/**
+	 * List of Task -objects.
+	 */
+    public static ArrayList<Task> Tasks = new ArrayList<>();
 	
 
 	 

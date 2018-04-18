@@ -4,9 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-
 
 
 public class TaskMain extends Task {
@@ -37,13 +37,16 @@ public class TaskMain extends Task {
 		
 		JLabel defLab = new JLabel("Task definition:");
 		JLabel prioLab = new JLabel("Priority (High, Medium, Low):");
-		JLabel dueLab = new JLabel("Due date:");
-		JLabel compLab = new JLabel("Completed:");
+		JLabel dueLab = new JLabel("Due date (dd/mm/yyyy):");
+
 		
 		JTextField def = new JTextField();
-		JTextField prior = new JTextField();
+	//	JTextField prior = new JTextField();
+		String[] priors = {"High","Medium","Low"};
+		JComboBox<String> prior = new JComboBox<String>(priors);
 		JTextField dDate = new JTextField();
-		JTextField done = new JTextField();
+        JCheckBox checkBox = new JCheckBox("Check to set task completed");
+        checkBox.setSelected(true);
 		
 		
 		JButton add = new JButton("Add");
@@ -54,12 +57,12 @@ public class TaskMain extends Task {
 		defLab.setBounds(20, 230, 200, 25);;
 		prioLab.setBounds(20, 280, 200, 25);;
 		dueLab.setBounds(20, 330, 200, 25);;
-		compLab.setBounds(20, 380, 200, 25);;
+
 		
 		def.setBounds(20, 250, 200, 25);
 		prior.setBounds(20, 300, 100, 25);
 		dDate.setBounds(20, 350, 100, 25);
-		done.setBounds(20, 400, 100, 25);
+		checkBox.setBounds(20, 400, 200, 25);
 	         
 		add.setBounds(300, 200, 80, 25);
 		update.setBounds(400, 200, 80, 25);
@@ -75,12 +78,13 @@ public class TaskMain extends Task {
 		frame.add(defLab);
 		frame.add(prioLab);
 		frame.add(dueLab);
-		frame.add(compLab);
+
 		frame.add(pane);
 		frame.add(def);
 		frame.add(prior);
 		frame.add(dDate);
-		frame.add(done);
+		frame.add(checkBox);
+
 
 		frame.add(add);
 		frame.add(delete);
@@ -96,9 +100,21 @@ public class TaskMain extends Task {
 			public void actionPerformed(ActionEvent e) 
 			{
 				row[0] = def.getText();
-				row[1] = prior.getText();
+				row[1] = prior.getSelectedItem().toString();
 				row[2] = dDate.getText();
-				row[3] = done.getText();
+				if (checkBox.isSelected() == true)
+					row[3] = ("Yes");
+				else
+				{
+					row[3] = ("No");
+					checkBox.setSelected(false);
+				}
+				try {
+					Tasks.add(new Task(def.getText(), prior.getSelectedItem().toString(), dDate.getText(), checkBox.isSelected()));
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+
 				
 				model.addRow(row);
 			}
@@ -115,6 +131,7 @@ public class TaskMain extends Task {
 				if(i >= 0)
 				{
 					model.removeRow(i);
+					Tasks.remove(i);
 				}
 				else
 				{
@@ -132,9 +149,7 @@ public class TaskMain extends Task {
 			{
 				int i = table.getSelectedRow();
 				def.setText(model.getValueAt(i, 0).toString());
-				prior.setText(model.getValueAt(i, 1).toString());
 				dDate.setText(model.getValueAt(i, 2).toString());
-				done.setText(model.getValueAt(i, 3).toString());
 
 			}
 		});
@@ -151,9 +166,21 @@ public class TaskMain extends Task {
 	                 if(i >= 0) 
 	                 {
 	                    model.setValueAt(def.getText(), i, 0);
-	                    model.setValueAt(prior.getText(), i, 1);
+	                    model.setValueAt(prior.getSelectedItem(),i, 1);
 	                    model.setValueAt(dDate.getText(), i, 2);
-	                    model.setValueAt(done.getText(), i, 3);
+	    				if (checkBox.isSelected() == true)
+	    					model.setValueAt("Yes", i, 3);
+	    				else
+	    				{
+	    					model.setValueAt("No", i, 3);
+	    					checkBox.setSelected(false);
+	    				}
+
+	    				try {
+							Tasks.set(i, new Task(def.getText(), prior.getSelectedItem().toString(), dDate.getText(), checkBox.isSelected()));
+						} catch (ParseException e1) {
+							e1.printStackTrace();
+						}
 	                 }
 	                 else
 	                 {
@@ -168,71 +195,4 @@ public class TaskMain extends Task {
 	         frame.setVisible(true);
 	         
 	     }
-		
-	/*	JFrame frame = new JFrame();
-		JTable table = new JTable();
-		frame.setTitle ("To do list:");
-		
-		Object[] columns = {"Task definition", "Priority", "Due date", "Completed"};
-		DefaultTableModel model = new DefaultTableModel();
-		model.setColumnIdentifiers(columns);
-		table.setModel(model);
-		
-		table.setRowHeight(30);
-		Font font = new Font("", 1, 22);
-		table.setFont(font);
-		table.setBackground(Color.white);
-		table.setForeground(Color.white);
-		
-		
-		//Label
-		JLabel label = new JLabel();
-		label.setText("Task definiton:");
-		
-		//Panel
-		JScrollPane pane = new JScrollPane(table);
-		pane.setBounds(0, 0, 880, 200);
-		frame.setLayout(null);
-		frame.add(pane);
-		
-		//Buttons
-		JButton add = new JButton("Add");
-		JButton delete = new JButton ("Delete");
-		JButton update = new JButton ("Update");
-		add.setBounds(150, 220, 100 ,25);
-		delete.setBounds(150, 220, 100 ,25);
-		update.setBounds(150, 220, 100 ,25);
-		
-		//Input
-		JTextField def = new JTextField(15);
-		def.setBounds(20, 220, 100, 25);
-		
-		
-		//Add
-		frame.add(label);
-		frame.add(def);
-		frame.add(table);
-		frame.add(add);
-		frame.add(delete);
-		frame.add(update);
-		
-		Object[] row = new Object[4];
-		add.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed (ActionEvent e)
-			{
-				row[0] = def.getText();
-				
-				model.addRow(row);
-			}
-			
-		});
-		
-		frame.setSize(900, 400);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	} */
-
 }
