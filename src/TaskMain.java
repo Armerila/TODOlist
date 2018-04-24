@@ -17,7 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
-public class TaskMain extends Task {
+public class TaskMain extends Task 
+{
 
 	public static void main(String[] args) 
 	{
@@ -28,6 +29,7 @@ public class TaskMain extends Task {
 		DefaultTableModel model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 		table.setModel(model);
+		table.setDefaultEditor(Object.class, null);
 		
 		table.setBackground(Color.LIGHT_GRAY);
 		table.setForeground(Color.black);
@@ -88,6 +90,7 @@ public class TaskMain extends Task {
 		frame.add(update);
 
 		Object[] row = new Object[4];
+
 	         
 		// add
 		add.addActionListener(new ActionListener()
