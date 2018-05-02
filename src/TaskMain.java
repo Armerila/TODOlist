@@ -18,11 +18,13 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
+
 public class TaskMain {
 	/**
 	 * List of Task -objects.
 	 */
     public static ArrayList<Task> tasks = new ArrayList<>();
+
 
 	public static void main(String[] args) 
 	{
@@ -91,7 +93,7 @@ public class TaskMain {
 		frame.add(update);
 
 		Object[] row = new Object[4];
-			
+
 		// add
 		add.addActionListener(new ActionListener()
 		{
