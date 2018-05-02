@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -17,7 +18,11 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 
-public class TaskMain extends Task {
+public class TaskMain {
+	/**
+	 * List of Task -objects.
+	 */
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
 	public static void main(String[] args) 
 	{
@@ -28,6 +33,7 @@ public class TaskMain extends Task {
 		DefaultTableModel model = new DefaultTableModel();
 		model.setColumnIdentifiers(columns);
 		table.setModel(model);
+		table.setDefaultEditor(Object.class, null);
 		
 		table.setBackground(Color.LIGHT_GRAY);
 		table.setForeground(Color.black);
@@ -75,20 +81,17 @@ public class TaskMain extends Task {
 		frame.add(defLab);
 		frame.add(prioLab);
 		frame.add(dueLab);
-
 		frame.add(pane);
 		frame.add(def);
 		frame.add(prior);
 		frame.add(dDate);
 		frame.add(checkBox);
-
-
 		frame.add(add);
 		frame.add(delete);
 		frame.add(update);
 
 		Object[] row = new Object[4];
-	         
+			
 		// add
 		add.addActionListener(new ActionListener()
 		{
@@ -110,7 +113,7 @@ public class TaskMain extends Task {
 					/**
 					 * Adds a new task with user input as parameters.
 					 */
-					Tasks.add(new Task(def.getText(), prior.getSelectedItem().toString(), dDate.getText(), checkBox.isSelected()));
+					tasks.add(new Task(def.getText(), prior.getSelectedItem().toString(), dDate.getText(), checkBox.isSelected()));
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
@@ -134,7 +137,7 @@ public class TaskMain extends Task {
 					/**
 					 * Delete the task at selected rows index.
 					 */
-					Tasks.remove(i);
+					tasks.remove(i);
 				}
 				else
 				{
@@ -182,7 +185,7 @@ public class TaskMain extends Task {
 	    				 * Update the task on selected rows index with user input as parameters.
 	    				 */
 	    				try {
-							Tasks.set(i, new Task(def.getText(), prior.getSelectedItem().toString(), dDate.getText(), checkBox.isSelected()));
+							tasks.set(i, new Task(def.getText(), prior.getSelectedItem().toString(), dDate.getText(), checkBox.isSelected()));
 						} catch (ParseException e1) {
 							e1.printStackTrace();
 						}

@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * Task-class and its attributes.
  */
-public class Task 
+public class Task
 {
 	/**
 	 * The CORRECT date format
@@ -19,7 +19,7 @@ public class Task
 	} 
 	private String taskDef;
 	private Priority priority; 
-	private static Date dueDate;
+	private Date dueDate;
 	private boolean isComplete;
 
 	public Task()
@@ -29,7 +29,6 @@ public class Task
 		dueDate = null;
 		isComplete = false;
 	}
-	
 	
 	/**
 	 * Task constructor
@@ -44,10 +43,10 @@ public class Task
 	{
 		this.taskDef = taskDef;
 		this.priority = Priority.valueOf(p.toUpperCase());
-		Task.dueDate = parser.parse(date);
+		this.dueDate = parser.parse(date);
 		this.isComplete = isComplete;
-
 	}
+	
 	/**
 	 * Returns a string representation of a tasks values.
 	 */
@@ -56,7 +55,6 @@ public class Task
 		return taskDef + " -"+priority+"- " +" "+dueDate +" "+isComplete;
 	}
 
-	///////Get/Set////////
 	
 	public Priority getPriority() 
 	{
@@ -96,21 +94,5 @@ public class Task
 	public void setComplete(boolean isComplete) 
 	{
 		this.isComplete = isComplete;
-	}
-	
-	/**
-	 * List of Task -objects.
-	 */
-    public static ArrayList<Task> Tasks = new ArrayList<>();
-	
-
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	} 
 }

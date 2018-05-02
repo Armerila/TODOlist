@@ -2,7 +2,7 @@ import java.text.ParseException;
 import org.junit.Test;
 
 
-public class Tasktest extends Task {
+public class Tasktest extends TaskMain {
 
 	@Test
     public void ttest() throws ParseException 
@@ -17,10 +17,10 @@ public class Tasktest extends Task {
     	Task ttask2 = new Task("DoSomethingElse", "High", ("12/12/2017"), true);
     	System.out.println(ttask2.toString());
     	
-    	Tasks.add(ttask);
-    	Tasks.add(ttask2);
+    	tasks.add(ttask);
+    	tasks.add(ttask2);
     	
-    	System.out.println(Tasks.get(1).toString());
-    	System.out.println(Tasks.get(0).toString());
+    	System.out.println(tasks.get(1).toString());
+    	System.out.println(tasks.get(0).toString());
     }
 }
