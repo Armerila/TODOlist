@@ -6,7 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -20,11 +19,11 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class TaskMain {
+	
 	/**
 	 * List of Task -objects.
 	 */
-    public static ArrayList<Task> tasks = new ArrayList<>();
-
+	public static ArrayList<Task> tasks = new ArrayList<>();
 
 	public static void main(String[] args) 
 	{
@@ -63,12 +62,10 @@ public class TaskMain {
 		defLab.setBounds(20, 230, 200, 25);;
 		prioLab.setBounds(20, 280, 200, 25);;
 		dueLab.setBounds(20, 330, 200, 25);;
-
 		def.setBounds(20, 250, 200, 25);
 		prior.setBounds(20, 300, 100, 25);
 		dDate.setBounds(20, 350, 100, 25);
-		checkBox.setBounds(20, 400, 200, 25);
-	         
+		checkBox.setBounds(20, 400, 200, 25);       
 		add.setBounds(300, 200, 80, 25);
 		update.setBounds(400, 200, 80, 25);
 		delete.setBounds(500, 200, 80, 25);
@@ -76,7 +73,6 @@ public class TaskMain {
 		// pane
 		JScrollPane pane = new JScrollPane(table);
 		pane.setBounds(0, 0, 880, 200);
-
 		frame.setLayout(null);
 
 		// add to frame
